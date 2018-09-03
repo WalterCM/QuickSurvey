@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Detalles{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-12">
+            <h2>Detalles de la encuesta</h2>
+            <p>Aqui se muestran los detalles de las encuestas realizadas. Puede editar o eliminar entradas:</p>
+        </div>
+        <div class="col-12">
+            {% for d in details %}
+                <p>
+                    <b>Nombre:</b> {{ d.first_name }} {{ d.last_name}}<br/>
+                    <b>DNI:</b> {{ d.dni }}<br/>
+                    <b>Sexo:</b> {{ d.sex }}<br/>
+                    <b>Fecha de nacimiento:</b> {{ d.birthdate }}<br/>
+                    <b>Email:</b> {{ d.email }}<br/>
+                    <b>Categoria: </b> {{ d.category}}<br/>
+                    <b>Razon de la seleccion:</b> {{ d.reason }}<br/>
+                </p>
+                <p><a href="/survey/{{ d.dni }}/edit/">Editar</a> <a href="/survey/{{ d.dni }}/delete/">Eliminar</a> </p>
+            {% endfor %}
+        </div>
+    </div>
+    
+    {% include "survey/pagination.html" with page=details %}
+{% endblock %}
