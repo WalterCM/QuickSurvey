@@ -27,8 +27,10 @@ def survey(request):
 def thanks(request):
     return render(request, 'survey/thanks.html')
 
-@login_required
 def results(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect('../../accounts/login/')
+
     results = []
     for category in get_categories():
         results.append({"category":category[1], "count":Survey.objects.filter(category=category[0]).count()})
